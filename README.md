@@ -1,6 +1,6 @@
 # .github
 
-Default community health files (e.g. pull request templates, issue templates, etc.)
+Default community health files (e.g. pull request templates, issue templates, etc.). Repository MUST remain public to work as expected.
 
 See the following links for more information:
 
