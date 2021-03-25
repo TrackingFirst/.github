@@ -1,0 +1,40 @@
+name: Tag and Release
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  tag-new-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Bump Version
+        uses: PaulHatch/semantic-version@v3.1.2
+        id: bump_version
+        with:
+          branch: "master"
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          format: "${major}.${minor}.${patch}"
+
+      - name: Generate release body
+        id: release_body
+        run: |
+          COMMITS="$(git log $(git describe --tags --abbrev=0)..HEAD --oneline)"
+          COMMITS="${COMMITS//'%'/'%25'}"
+          COMMITS="${COMMITS//$'\n'/'%0A'}"
+          COMMITS="${COMMITS//$'\r'/'%0D'}"
+          echo "::set-output name=release_body::$COMMITS"
+
+      - name: Tag and Release
+        uses: ncipollo/release-action@v1
+        with:
+          body: ${{ steps.release_body.outputs.release_body }}
+          tag: ${{ steps.bump_version.outputs.version_tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
