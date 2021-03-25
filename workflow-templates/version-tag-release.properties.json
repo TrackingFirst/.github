@@ -1,0 +1,5 @@
+{
+  "name": "Version Tag Release",
+  "description": "Automatically bump version, create tag and release on merge to master",
+  "iconName": "version-tag-release"
+}
