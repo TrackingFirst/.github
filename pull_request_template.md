@@ -2,9 +2,12 @@
 
 TODO
 
-# Reminders for Requester
+### Testing Instructions
 
-- [ ] I created appropriate feature flags and added them to the migrations
+- TODO
+
+# Reminders for Requester (remove non-applicable items)
+
 - [ ] I tested basic CRUD functionality for this feature
 - [ ] I tested areas at risk of regression to make sure nothing broke
 - [ ] I wrote automated tests where applicable
